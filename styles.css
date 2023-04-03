@@ -1,0 +1,47 @@
+body{
+    background-image: url("images/home_background.svg");
+    background-size: 90%,100%;
+}
+
+#container{
+    width: 100%;
+    height: 97vh;
+    
+}
+
+navbar{
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+    color: #868A8A;
+    font-family: "Segoe UI";
+    
+    
+}
+navbar navbuttons{
+    width: 500px;
+    display: flex;
+    font-size: 13px;
+    justify-content: start;
+    margin-right: 40px ;
+}
+navbar navbuttons h2{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+line{
+    color: #868A8A;
+    width: 70%;
+    display: block;
+    margin: auto;
+}
+
+navbar navsearch{
+    width: 700px;
+    display: flex;
+}
+navbar navsearch img{
+    width: 20px;
+    margin-right: 60px;
+}
+
