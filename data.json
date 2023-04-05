@@ -1,0 +1,23 @@
+{
+    "windows": [
+      {
+        "id": 0,
+        "width": 300,
+        "height": 200,
+        "quote": "Quote 1"
+      },
+      {
+        "id": 1,
+        "width": 400,
+        "height": 250,
+        "quote": "Quote 2"
+      },
+      {
+        "id": 2,
+        "width": 250,
+        "height": 150,
+        "quote": "Quote 3"
+      }
+    ]
+  }
+  
