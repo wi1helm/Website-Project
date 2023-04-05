@@ -1,28 +1,41 @@
 body{
-    background-image: url("images/home_background.svg");
-    background-size: 90%,100%;
+    padding: 0;
+    margin: 0;
+    background-image: url("images/home.png");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #container{
     width: 100%;
-    height: 97vh;
-    
+    height: 100vh;
 }
 
 navbar{
-    margin-top: 20px;
+    height: 10%;
+    width: 100%;
+    padding-top: 10px;
     display: flex;
-    justify-content: end;
+    align-items: center;
     color: #868A8A;
     font-family: "Segoe UI";
     
     
 }
+empty{
+    display: block;
+    height: 100%;
+    width: 35%;
+}
+
+
 navbar navbuttons{
-    width: 500px;
+    height: 100%;
+    width: 25%;
     display: flex;
     font-size: 13px;
     justify-content: start;
+    align-items: center;
     margin-right: 40px ;
 }
 navbar navbuttons h2{
@@ -31,17 +44,69 @@ navbar navbuttons h2{
 }
 line{
     color: #868A8A;
-    width: 70%;
+    width: 60%;
     display: block;
     margin: auto;
 }
 
 navbar navsearch{
-    width: 700px;
+    height: 100%;
+    width: 40%;
     display: flex;
 }
 navbar navsearch img{
     width: 20px;
     margin-right: 60px;
 }
+content{
+    display: block;
+    width: 100%;
+    height: calc(80% - 10px);
+    max-height: 80%;
 
+}
+footer{
+    display: flex;
+    width: 100%;
+    height: 10%;
+    max-height: 10%;
+    min-height: 10%;
+    align-items: center;
+}
+selectcolor{
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+circle{
+    margin-left: 20px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: aquamarine;
+}
+
+.C_blue{
+    background-color: #4195DB;
+}
+.C_yellow{
+    background-color: #E2AC0A;
+}
+.C_purple{
+    background-color: #A63BB7;
+}
+
+actionbar{
+    display: block;
+    width: 80%;
+    height: 100%;
+}
+
+madeby{
+    color: #868A8A;
+    display: flex;
+    justify-content: end;
+    margin-left: 40px;
+}
