@@ -1,23 +1,40 @@
 {
-    "windows": [
-      {
-        "id": 0,
-        "width": 300,
-        "height": 200,
-        "quote": "gfkjoijgjkfdnbgklöfrnjk"
-      },
-      {
-        "id": 1,
-        "width": 400,
-        "height": 250,
-        "quote": "Quote 2"
-      },
-      {
-        "id": 2,
-        "width": 250,
-        "height": 150,
-        "quote": "Quote 3"
-      }
-    ]
-  }
-  
+  "windows": [
+    {
+      "id": 0,
+      "title": "Wilhelm",
+      "text": "Hamnar = handlar.",
+      "date": "2023-03-20"
+    },
+    {
+      "id": 1,
+      "title": "Wilhelm",
+      "text": "Fick en personlig inbjudan att mobba.",
+      "date": "2023-03-21"
+    },
+    {
+      "id": 2,
+      "title": "Wilhelm",
+      "text": "TRashig.",
+      "date": "2023-03-21"
+    },
+    {
+      "id": 3,
+      "title": "Raf0",
+      "text": "Crack är hela Boris Johnsons aesthetic - Alexander.",
+      "date": "2023-03-22"
+    },
+    {
+      "id": 4,
+      "title": "Wilhelm",
+      "text": "Jag föddes när jag var 3.",
+      "date": "2023-03-23"
+    },
+    {
+      "id": 5,
+      "title": "Wilhelm",
+      "text": "Hittade var Gud spawnade och började rendera världen.",
+      "date": "2023-03-24"
+    }
+  ]
+}
