@@ -177,11 +177,12 @@ circle{
 #actionbar{
     display: flex;
     align-items: center;
-    width: 80%;
+    width: 75%;
     height: 100%;
 }
 
 .actionbar-window {
+    user-select: none;
     text-transform: uppercase;
     display: inline-block;
     display: flex;

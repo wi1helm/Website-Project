@@ -40,6 +40,10 @@ function createQuoteWindow(window) {
     const exitCircle = document.createElement('circle');
     exitCircle.classList.add('C_exit');
     exitCircle.id = 'exit';
+    exitCircle.addEventListener('click', () => {
+      closeWindow(windowDiv);
+      console.log("oba,a")
+    });
     exit.appendChild(exitCircle);
   
     windowBar.appendChild(title);
@@ -90,18 +94,22 @@ function createQuoteWindow(window) {
   }
 
 
-function createActionBarElement(windowData) {
+function createActionBarElement(windowData, UID) {
     const actionBarElement = document.createElement('div');
     actionBarElement.classList.add('actionbar-window');
-
-    const maxTitleLength = 17;
+    actionBarElement.UID = UID;
+    const maxTitleLength = 15;
     let windowTitle = windowData.title;
-
+    
     if (windowTitle.length > maxTitleLength) {
         windowTitle = windowTitle.substring(0, maxTitleLength - 2) + '..';
     }
 
     actionBarElement.innerText = windowTitle;
+    actionBarElement.addEventListener('click', () => {
+      reopenWindow(UID, windowData);
+      console.log(UID,windowData)
+    });
 
     return actionBarElement;
 }
@@ -142,47 +150,69 @@ function createWindow(id, windowData, windowType) {
             const randomQuote = windowData[randomId];
             updateWindowContent(Window, randomQuote);
           });
+          let UID = 23 * window.id / (windowList.length + 1);
 
           const content = document.getElementById("content");
           content.appendChild(Window);
           Window.style.display = 'block';
           Window.style.zIndex = highestZIndex;
+          Window.UID = UID;
+
+          
 
           // Apply an offset to the window's position
           const positionOffset = 20 * createdWindows;
           Window.style.left = `calc(20% + ${positionOffset}px)`;
           Window.style.top = `calc(20% + ${positionOffset}px)`;
           createdWindows++; // Increment the created windows counter
-          windowList.push(window.id);
+          windowList.push(Window.UID);
           console.log(windowList);
 
           // Add the actionbar element
-          const actionBarElement = createActionBarElement(window);
+          const actionBarElement = createActionBarElement(window, Window.UID);
           actionBar.appendChild(actionBarElement);
 
           break;
       }
   }
 }
-  
-  // Load JSON data and show the first window
-  load().then(windowData => {
-    createWindow(5, windowData, 'quote');
-    createWindow(2, windowData, 'quote');
-    createWindow(2, windowData, 'quote');
-    createWindow(2, windowData, 'quote');
-    createWindow(2, windowData, 'quote');
-    createWindow(2, windowData, 'quote');
-  });
-  //Now, the function will only create and display the window with the specified id. If you want to create multiple windows, just call the createWindow function multiple times with different id values.
-  
+
+function closeWindow(windowElement) {
+  windowElement.style.display = 'none'; // Hide the window
+}
+function reopenWindow(id, windowData) {
+  const content = document.getElementById("content");
+  const children = content.children;
+
+  for (let i = 0; i < children.length; i++) {
+    const windowElement = children[i];
+
+    if (windowElement.UID === id) {
+      windowElement.style.display = 'block';
+      windowElement.style.zIndex = highestZIndex;
+      highestZIndex ++;
+      break;
+    }
+  }
+}
+// Load JSON data and show the first window
+load().then(windowData => {
+  createWindow(5, windowData, 'quote');
+  createWindow(2, windowData, 'quote');
+  createWindow(2, windowData, 'quote');
+  createWindow(2, windowData, 'quote');
+  createWindow(2, windowData, 'quote');
+  createWindow(2, windowData, 'quote');
+});
+//Now, the function will only create and display the window with the specified id. If you want to create multiple windows, just call the createWindow function multiple times with different id values.
+
 
 
 function selectWindow(event) {
     
     currentWindow = event.currentTarget.parentNode;
     currentWindow.style.zIndex = highestZIndex;
-    highestZIndex += 1;
+    highestZIndex ++;
     const bounds = currentWindow.getBoundingClientRect();
     const bodyBounds = document.body.getBoundingClientRect();
     offset.x = event.clientX - bounds.left + bodyBounds.left;
