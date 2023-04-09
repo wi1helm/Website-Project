@@ -139,7 +139,7 @@ footer{
     align-items: center;
 }
 selectcolor{
-    width: 20%;
+    width: 10%;
     padding-left: 20px;
     display: flex;
     flex-direction: row;
@@ -174,14 +174,33 @@ circle{
     background-color: #E85A5A;
 }
 
-actionbar{
-    display: block;
-    width: 70%;
+#actionbar{
+    display: flex;
+    align-items: center;
+    width: 80%;
     height: 100%;
 }
 
-
-
+.actionbar-window {
+    text-transform: uppercase;
+    display: inline-block;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #393E53;
+    color: #C2C2C2;
+    border-radius: 5px;
+    font-family: "Rockwell";
+    font-size: 18px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: calc(250px - 20px); 
+    box-sizing: border-box;
+    filter: drop-shadow(8px 8px 6px rgba(23, 167, 176, 0.16)); /* 16% opacity drop-shadow */
+}
 
 
 madeby{

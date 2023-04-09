@@ -1,4 +1,5 @@
 windowList = [];
+let createdWindows = 0;
 let currentWindow = null;
 let highestZIndex = 0;
 let offset = { x: 0, y: 0 };
@@ -68,6 +69,7 @@ function createQuoteWindow(window) {
     date.textContent = window.date;
     date.style.fontSize = '40px';
     date.style.color = 'white';
+    date.id = "date"
     dateDiv.appendChild(date);
     windowContent.appendChild(dateDiv);
   
@@ -75,9 +77,10 @@ function createQuoteWindow(window) {
     imageDiv.style.height = '50%';
     imageDiv.style.display = 'flex';
     imageDiv.style.alignItems = 'end';
-    const image = document.createElement('img');
-    image.src = 'images/dice.svg';
-    imageDiv.appendChild(image);
+    const dice = document.createElement('img');
+    dice.src = 'images/dice.svg';
+    dice.id = 'dice';
+    imageDiv.appendChild(dice);
     windowContent.appendChild(imageDiv);
   
     windowDiv.appendChild(windowBar);
@@ -85,38 +88,90 @@ function createQuoteWindow(window) {
   
     return windowDiv;
   }
-  
-function createWindow(id, windowData, windowType) {
-    for (let i = 0; i < windowData.length; i++) {
-        const window = windowData[i];
-        
-        if (window.id === id) {
-            let Window;
-  
-        if (windowType === 'quote') {
-          Window = createQuoteWindow(window);
-        } else if (windowType === 'yourWindowType') {
-          // Add your own window creation function here
-          // Example: quoteWindow = createYourWindowType(window);
-        } else {
-          console.error('Unknown window type:', windowType);
-          return;
-        }
-  
-        const content = document.getElementById("content");
-        content.appendChild(Window);
-        Window.style.display = 'block';
-        Window.style.zIndex = highestZIndex;
-        windowList.push(window.id);
-        console.log(windowList);
-        break;
-      }
+
+
+function createActionBarElement(windowData) {
+    const actionBarElement = document.createElement('div');
+    actionBarElement.classList.add('actionbar-window');
+
+    const maxTitleLength = 17;
+    let windowTitle = windowData.title;
+
+    if (windowTitle.length > maxTitleLength) {
+        windowTitle = windowTitle.substring(0, maxTitleLength - 2) + '..';
     }
+
+    actionBarElement.innerText = windowTitle;
+
+    return actionBarElement;
+}
+
+function updateWindowContent(Window, quoteData) {
+  const titleElement = Window.querySelector('.title p');
+  const textElement = Window.querySelector('.windowcontent h1');
+  const dateElement = Window.querySelector('.windowcontent #date');
+  console.log(window,"obama")
+  titleElement.textContent = quoteData.title;
+  textElement.textContent = quoteData.text.toUpperCase();
+  dateElement.textContent = quoteData.date;
+}
+
+function createWindow(id, windowData, windowType) {
+  const actionBar = document.getElementById('actionbar');
+  
+  for (let i = 0; i < windowData.length; i++) {
+      const window = windowData[i];
+      
+      if (window.id === id) {
+          let Window;
+
+          
+          if (windowType === 'quote') {
+              Window = createQuoteWindow(window);
+          } else if (windowType === 'yourWindowType') {
+              // Add your own window creation function here
+              // Example: quoteWindow = createYourWindowType(window);
+          } else {
+              console.error('Unknown window type:', windowType);
+              return;
+          }
+
+          const dice = Window.querySelector('#dice');
+          dice.addEventListener('click', () => {
+            const randomId = Math.floor(Math.random() * windowData.length);
+            const randomQuote = windowData[randomId];
+            updateWindowContent(Window, randomQuote);
+          });
+
+          const content = document.getElementById("content");
+          content.appendChild(Window);
+          Window.style.display = 'block';
+          Window.style.zIndex = highestZIndex;
+
+          // Apply an offset to the window's position
+          const positionOffset = 20 * createdWindows;
+          Window.style.left = `calc(20% + ${positionOffset}px)`;
+          Window.style.top = `calc(20% + ${positionOffset}px)`;
+          createdWindows++; // Increment the created windows counter
+          windowList.push(window.id);
+          console.log(windowList);
+
+          // Add the actionbar element
+          const actionBarElement = createActionBarElement(window);
+          actionBar.appendChild(actionBarElement);
+
+          break;
+      }
   }
+}
   
   // Load JSON data and show the first window
   load().then(windowData => {
     createWindow(5, windowData, 'quote');
+    createWindow(2, windowData, 'quote');
+    createWindow(2, windowData, 'quote');
+    createWindow(2, windowData, 'quote');
+    createWindow(2, windowData, 'quote');
     createWindow(2, windowData, 'quote');
   });
   //Now, the function will only create and display the window with the specified id. If you want to create multiple windows, just call the createWindow function multiple times with different id values.
