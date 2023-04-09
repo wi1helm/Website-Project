@@ -197,26 +197,25 @@ function reopenWindow(id, windowData) {
 }
 // Load JSON data and show the first window
 load().then(windowData => {
+  createWindow(0, windowData, 'quote');
+  createWindow(1, windowData, 'quote');
+  createWindow(2, windowData, 'quote');
+  createWindow(3, windowData, 'quote');
+  createWindow(4, windowData, 'quote');
   createWindow(5, windowData, 'quote');
-  createWindow(2, windowData, 'quote');
-  createWindow(2, windowData, 'quote');
-  createWindow(2, windowData, 'quote');
-  createWindow(2, windowData, 'quote');
-  createWindow(2, windowData, 'quote');
 });
 //Now, the function will only create and display the window with the specified id. If you want to create multiple windows, just call the createWindow function multiple times with different id values.
 
 
 
 function selectWindow(event) {
-    
     currentWindow = event.currentTarget.parentNode;
     currentWindow.style.zIndex = highestZIndex;
-    highestZIndex ++;
+    highestZIndex += 1;
     const bounds = currentWindow.getBoundingClientRect();
     const bodyBounds = document.body.getBoundingClientRect();
     offset.x = event.clientX - bounds.left + bodyBounds.left;
-    offset.y = event.clientY - bounds.top + bodyBounds.top + 90;
+    offset.y = event.clientY - bounds.top + bodyBounds.top + 90; // Remove the "+ 90" here
     document.addEventListener('mousemove', moveWindow);
     document.addEventListener('mouseup', releaseWindow);
 }
