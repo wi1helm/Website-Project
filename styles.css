@@ -84,6 +84,9 @@ navbar navsearch{
     width: 20px;
     margin-right: 60px;
 }
+.icon:hover{
+    cursor: pointer;
+}
 
 /*All content on the middle of the screen, like windows*/
 #content{
@@ -160,7 +163,9 @@ selectcolor{
     border-radius: 50%;
     background-color: aquamarine;
 }
-
+.circle:hover{
+    cursor: pointer;
+}
 #exit{
     width: 16px;
     height: 16px;

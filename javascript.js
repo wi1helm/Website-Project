@@ -1,13 +1,13 @@
 windowList = [];
 let createdWindows = 0;
 let currentWindow = null;
-let highestZIndex = 0;
+window.highestZIndex = 0;
 let offset = { x: 0, y: 0 };
 
 
 
 function load() {
-    return fetch('data.json')
+    return fetch('assets/data.json')
       .then(response => response.json())
       .then(data => {
         // Get window data from JSON
@@ -156,7 +156,7 @@ function createWindow(id, windowData, windowType) {
           const content = document.getElementById("content");
           content.appendChild(Window);
           Window.style.display = 'block';
-          Window.style.zIndex = highestZIndex;
+          Window.style.zIndex = window.highestZIndex;
           Window.UID = UID;
 
           
@@ -190,8 +190,8 @@ function reopenWindow(id, windowData) {
 
     if (windowElement.UID === id) {
       windowElement.style.display = 'block';
-      windowElement.style.zIndex = highestZIndex;
-      highestZIndex ++;
+      windowElement.style.zIndex = window.highestZIndex;
+      window.highestZIndex ++;
       break;
     }
   }
@@ -211,8 +211,8 @@ load().then(windowData => {
 
 function selectWindow(event) {
     currentWindow = event.currentTarget.parentNode;
-    currentWindow.style.zIndex = highestZIndex;
-    highestZIndex += 1;
+    currentWindow.style.zIndex = window.highestZIndex;
+    window.highestZIndex += 1;
     const bounds = currentWindow.getBoundingClientRect();
     const bodyBounds = document.body.getBoundingClientRect();
     offset.x = event.clientX - bounds.left + bodyBounds.left;

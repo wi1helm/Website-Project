@@ -1,0 +1,35 @@
+{
+    "presets": [
+      {
+        "name": "Gray",
+        "colors": {
+          "mainText": "#0000FF",
+          "title": "#17A7B0",
+          "windowBackground": "rgba(50, 52, 65,0.82)",
+          "windowBar": "rgba(35, 34, 39,0.82)",
+          "dropdown": "rgba(23, 167, 176, 0.16)"
+        }
+      },
+      {
+        "name": "Green",
+        "colors": {
+          "mainText": "#0000FF",
+          "title": "#17A7B0",
+          "windowBackground": "rgba(76, 175, 80,0.82)",
+          "windowBar": "rgba(35, 34, 39,0.82)",
+          "dropdown": "rgba(23, 167, 176, 0.16)"
+        }
+      },
+      {
+        "name": "Purple",
+        "colors": {
+          "mainText": "#0000FF",
+          "title": "#17A7B0",
+          "windowBackground": "rgba(156, 39, 176,0.82)",
+          "windowBar": "rgba(35, 34, 39,0.82)",
+          "dropdown": "rgba(23, 167, 176, 0.16)"
+        }
+      }
+    ]
+  }
+  
