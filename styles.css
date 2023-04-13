@@ -52,10 +52,14 @@ h2, h1, a{
     font-family: "Segoe UI";
     text-decoration: none;
     font-size: 18px;
-
-
-
 }
+#text{
+    color: #868A8A;
+    font-family: "Segoe UI";
+    text-decoration: none;
+    font-size: 18px;
+}
+
 line{
     color: #868A8A;
     width: 60%;
@@ -74,6 +78,7 @@ navbar navsearch{
     height: 100%;
     width: 35%;
     display: flex;
+    
 }
 .icon{
     width: 20px;
@@ -145,9 +150,10 @@ selectcolor{
     flex-direction: row;
     justify-content: flex-start;
 }
-circle{
+.circle{
     opacity: 100%;
-    margin-left: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     display: block;
     width: 20px;
     height: 20px;
@@ -160,16 +166,6 @@ circle{
     height: 16px;
 }
 
-
-.C_blue{
-    background-color: #4195DB;
-}
-.C_yellow{
-    background-color: #E2AC0A;
-}
-.C_purple{
-    background-color: #A63BB7;
-}
 .C_exit{
     background-color: #E85A5A;
 }
@@ -210,4 +206,33 @@ madeby{
     display: flex;
     justify-content: center;
     margin-right: 20px;
+}
+
+
+
+
+#settings-container{
+    border-radius: 5px;
+    position: absolute;
+    width: 250px;
+    height: 300px;
+    background-color: rgba(	35, 34, 39,0.82);
+    border: 5px;
+    border-style: solid;
+    border-color: rgba(23, 167, 176, 0.20);
+    top: 100px;
+    left: calc(100% - 300px);
+}
+
+#favorite-colors{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+#circle-colors{
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
 }

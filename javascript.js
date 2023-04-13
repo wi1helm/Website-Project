@@ -37,8 +37,9 @@ function createQuoteWindow(window) {
   
     const exit = document.createElement('div');
     exit.classList.add('exit');
-    const exitCircle = document.createElement('circle');
+    const exitCircle = document.createElement('div');
     exitCircle.classList.add('C_exit');
+    exitCircle.classList.add('circle');
     exitCircle.id = 'exit';
     exitCircle.addEventListener('click', () => {
       closeWindow(windowDiv);
@@ -215,7 +216,7 @@ function selectWindow(event) {
     const bounds = currentWindow.getBoundingClientRect();
     const bodyBounds = document.body.getBoundingClientRect();
     offset.x = event.clientX - bounds.left + bodyBounds.left;
-    offset.y = event.clientY - bounds.top + bodyBounds.top + 90; // Remove the "+ 90" here
+    offset.y = event.clientY - bounds.top + bodyBounds.top + 90;
     document.addEventListener('mousemove', moveWindow);
     document.addEventListener('mouseup', releaseWindow);
 }
@@ -240,4 +241,4 @@ function releaseWindow(event) {
     document.removeEventListener('mousemove', moveWindow);
     document.removeEventListener('mouseup', releaseWindow);
   }
-  
+
