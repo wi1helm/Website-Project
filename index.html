@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="javascript.js"></script>
     <script src="settings.js"></script>
+    <script src="search.js"></script>
     <title>Wi1helm</title>
 </head>
 <body>
@@ -19,9 +20,12 @@
                 <a href="contact.html">Contact</a>
             </navbuttons>
             <navsearch>
-                <line>
-                    <hr> 
-                </line>
+                <div id="line">
+                    <hr id="search-line">   
+                </div>
+                <div id="search-container">
+                    <input id="search-input" type="text" placeholder="">
+                  </div>
                 <img class="icon" src="images/search.svg">
                 <img class="icon" id="settings-icon" src="images/settings.svg">
                 
@@ -33,11 +37,7 @@
             
         </div>
         <footer>
-            <selectcolor>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-            </selectcolor>
+            <div id="color-selection"></div>
             <actionbar id="actionbar">
                 
             </actionbar>

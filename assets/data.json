@@ -2,36 +2,42 @@
   "windows": [
     {
       "id": 0,
+      "type": "quote",
       "title": "Wilhelm",
       "text": "Hamnar = handlar.",
       "date": "2023-03-20"
     },
     {
       "id": 1,
+      "type": "quote",
       "title": "Wilheljkghjkgfmklgfmkgklfdmgkldfmgklfmkm",
       "text": "Fick en personlig inbjudan att mobba.",
       "date": "2023-03-21"
     },
     {
       "id": 2,
+      "type": "quote",
       "title": "Wilhelm",
       "text": "TRashig.",
       "date": "2023-03-21"
     },
     {
       "id": 3,
+      "type": "quote",
       "title": "Raf0",
       "text": "Crack är hela Boris Johnsons aesthetic - Alexander.",
       "date": "2023-03-22"
     },
     {
       "id": 4,
+      "type": "quote",
       "title": "Wilhelm",
       "text": "Jag föddes när jag var 3.",
       "date": "2023-03-23"
     },
     {
       "id": 5,
+      "type": "quote",
       "title": "Wilhgjjnjknjdfngjkldhejhejehje",
       "text": "Hittade var Gud spawnade och började rendera världen.",
       "date": "2023-03-24"

@@ -43,7 +43,7 @@ function createQuoteWindow(window) {
     exitCircle.id = 'exit';
     exitCircle.addEventListener('click', () => {
       closeWindow(windowDiv);
-      console.log("oba,a")
+      
     });
     exit.appendChild(exitCircle);
   
@@ -109,7 +109,7 @@ function createActionBarElement(windowData, UID) {
     actionBarElement.innerText = windowTitle;
     actionBarElement.addEventListener('click', () => {
       reopenWindow(UID, windowData);
-      console.log(UID,windowData)
+      
     });
 
     return actionBarElement;
@@ -119,7 +119,7 @@ function updateWindowContent(Window, quoteData) {
   const titleElement = Window.querySelector('.title p');
   const textElement = Window.querySelector('.windowcontent h1');
   const dateElement = Window.querySelector('.windowcontent #date');
-  console.log(window,"obama")
+  
   titleElement.textContent = quoteData.title;
   textElement.textContent = quoteData.text.toUpperCase();
   dateElement.textContent = quoteData.date;
@@ -167,7 +167,7 @@ function createWindow(id, windowData, windowType) {
           Window.style.top = `calc(20% + ${positionOffset}px)`;
           createdWindows++; // Increment the created windows counter
           windowList.push(Window.UID);
-          console.log(windowList);
+  
 
           // Add the actionbar element
           const actionBarElement = createActionBarElement(window, Window.UID);
@@ -228,8 +228,7 @@ function moveWindow(event) {
         const maxHeight = window.innerHeight - windowRect.height;
         const left = Math.max(0, Math.min(maxWidth, event.clientX - offset.x));
         const top = Math.max(0, Math.min(maxHeight, event.clientY - offset.y));
-        console.log('Cursor position:', event.clientX, event.clientY);
-        console.log('Window position:', left, top);
+
         currentWindow.style.left = left + 'px';
         currentWindow.style.top = top + 'px';
     }
