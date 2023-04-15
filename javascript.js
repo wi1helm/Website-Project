@@ -196,6 +196,7 @@ function reopenWindow(id, windowData) {
     }
   }
 }
+
 // Load JSON data and show the first window
 load().then(windowData => {
   createWindow(0, windowData, 'quote');

@@ -71,8 +71,11 @@ h2, h1, a{
     margin-left: 0;
     margin-right: 60px;
     position: relative;
+    background-position: 0;
   }
-  
+#line:hover{
+    background-position: 10;
+}
   hr {
     width: 100%;
     margin: 0px;
@@ -277,4 +280,16 @@ madeby{
 #search-input{
     display: none;
     position: absolute;
+}
+
+#search-dropdown{
+    border-radius: 5px;
+    position: absolute;
+    width: 100%;
+    height: 300px;
+    background-color: rgba(	35, 34, 39,0.82);
+    border: 5px;
+    border-style: solid;
+    border-color: rgba(23, 167, 176, 0.20);
+    top: 60px;
 }
