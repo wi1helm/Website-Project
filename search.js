@@ -7,7 +7,9 @@ function animateLinesApart() {
   if (isAnimating) {
     clearTimeout(animationTimeout);
   }
-
+  if (searchDropDownOpen){
+    return
+  }
   const searchElement = document.getElementById("line");
   searchElement.innerHTML = "";
 
@@ -30,18 +32,20 @@ function animateLinesApart() {
 
   input.addEventListener("input", (event) => {
     const inputValue = event.target.value;
-    if (inputValue.length > 0 && searchDropDownOpen == false ) {
-      searchDropDownOpen = true;
-      console.log(inputValue, searchDropDownOpen)
+  
+    if (inputValue.length > 0) {
+      if (searchDropDownOpen === false) {
+        searchDropDownOpen = true;
+      }
       showSearchResults(inputValue);
     } else {
-      if (searchDropDownOpen == false){
-      const searchDropdown = document.getElementById("search-dropdown");
-      if (searchDropdown) {
-        searchDropDownOpen = false;
-        searchDropdown.remove();
+      if (searchDropDownOpen === true) {
+        const searchDropdown = document.getElementById("search-dropdown");
+        if (searchDropdown) {
+          searchDropDownOpen = false;
+          searchDropdown.remove();
+        }
       }
-    }
     }
   });
 
@@ -72,6 +76,11 @@ function animateLinesTogether() {
   const lowerLine = document.getElementById("lowerline");
   const input = document.getElementById("search-input");
 
+  if (searchDropDownOpen == true) {
+    console.log("obama")
+    return;
+  }
+
   sessionStorage.setItem("text", input.value);
 
   input.style.display = "none";
@@ -96,22 +105,45 @@ function animateLinesTogether() {
 }
 
 async function showSearchResults(inputValue) {
+
+  
+
   const response = await fetch("assets/data.json");
   const data = await response.json();
 
   const windows = data.windows;
-  const searchResults = windows.filter(window => window.title.includes(inputValue));
+  const searchResults = windows.filter(window => window.title.toLowerCase().includes(inputValue.toLowerCase()));
   const searchDropdown = document.createElement("div");
   searchDropdown.id = "search-dropdown";
   searchDropdown.style.zIndex = "9999";
+  
+
+  const specificElement = document.getElementById("line");
+
+  // Attach a click event listener to the document
+  document.addEventListener("click", (event) => {
+  // Check if the click target is the specific element or one of its children
+    if (!specificElement.contains(event.target)) {
+      searchDropDownOpen = false;
+      animateLinesTogether();
+      // Perform any action you want when a click occurs outside the specific element
+  }
+  });
 
   for (const result of searchResults) {
     const resultLink = document.createElement("a");
     resultLink.textContent = result.title;
     resultLink.href = "#";
     resultLink.addEventListener("click", () => {
-      console.log(result.id);
       searchDropdown.remove();
+      const windowExists = windowList.find(window => window.dataset.windowId === result.id);
+      if (windowExists) {
+        reopenWindow(windowExists.UID);
+      } else {
+        const newWindow = createWindow(result.id, windows, "quote");
+        const content = document.getElementById("content");
+        content.appendChild(newWindow);
+      }
     });
     searchDropdown.appendChild(resultLink);
   }
@@ -119,6 +151,7 @@ async function showSearchResults(inputValue) {
   const searchElement = document.getElementById("line");
   searchElement.appendChild(searchDropdown);
 }
+
 
 
 document.addEventListener("DOMContentLoaded", () => {

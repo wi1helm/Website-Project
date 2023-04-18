@@ -62,7 +62,7 @@ h2, h1, a{
 
 #line {
     color: #868A8A;
-    width: 60%;
+    width: 100%;
     height: 50px;
     display: flex;
     flex-direction: column;
@@ -283,6 +283,8 @@ madeby{
 }
 
 #search-dropdown{
+    display: flex;
+    flex-direction: column;
     border-radius: 5px;
     position: absolute;
     width: 100%;
@@ -291,5 +293,6 @@ madeby{
     border: 5px;
     border-style: solid;
     border-color: rgba(23, 167, 176, 0.20);
-    top: 60px;
+    top: 80px;
+    
 }
