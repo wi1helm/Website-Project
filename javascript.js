@@ -1,4 +1,4 @@
-windowList = [];
+export let windowList = [];
 let createdWindows = 0;
 let currentWindow = null;
 window.highestZIndex = 0;
@@ -45,6 +45,15 @@ function createQuoteWindow(window) {
       closeWindow(windowDiv);
       
     });
+    const minCircle = document.createElement('div');
+    minCircle.classList.add('C_min');
+    minCircle.classList.add('circle');
+    minCircle.id = 'exit';
+    minCircle.addEventListener('click', () => {
+      removeWindow(windowDiv);
+      
+    });
+    exit.appendChild(minCircle);
     exit.appendChild(exitCircle);
   
     windowBar.appendChild(title);
@@ -125,9 +134,12 @@ function updateWindowContent(Window, quoteData) {
   dateElement.textContent = quoteData.date;
 }
 
-function createWindow(id, windowData, windowType) {
+export function createWindow(id, windowData, windowType) {
   const actionBar = document.getElementById('actionbar');
-  
+  if (createdWindows > 7){
+    return
+  }
+
   for (let i = 0; i < windowData.length; i++) {
       const window = windowData[i];
       
@@ -166,7 +178,7 @@ function createWindow(id, windowData, windowType) {
           Window.style.left = `calc(20% + ${positionOffset}px)`;
           Window.style.top = `calc(20% + ${positionOffset}px)`;
           createdWindows++; // Increment the created windows counter
-          windowList.push(Window.UID);
+          windowList.push(Window);
   
 
           // Add the actionbar element
@@ -178,17 +190,33 @@ function createWindow(id, windowData, windowType) {
   }
 }
 
+function removeWindow(windowElement){
+  windowElement.remove();
+  createdWindows -= 1;
+  const actionBar = document.getElementById('actionbar');
+  const actionBarElements = actionBar.children;
+
+  for (let i = 0; i < actionBarElements.length; i++) {
+    const actionBarElement = actionBarElements[i];
+
+    if (actionBarElement.UID === windowElement.UID) {
+      actionBar.removeChild(actionBarElement);
+      break;
+    }
+  }
+}
+
 function closeWindow(windowElement) {
   windowElement.style.display = 'none'; // Hide the window
 }
-function reopenWindow(id, windowData) {
+export function reopenWindow(UID, windowData) {
   const content = document.getElementById("content");
   const children = content.children;
 
   for (let i = 0; i < children.length; i++) {
     const windowElement = children[i];
 
-    if (windowElement.UID === id) {
+    if (windowElement.UID === UID) {
       windowElement.style.display = 'block';
       windowElement.style.zIndex = window.highestZIndex;
       window.highestZIndex ++;
@@ -200,11 +228,6 @@ function reopenWindow(id, windowData) {
 // Load JSON data and show the first window
 load().then(windowData => {
   createWindow(0, windowData, 'quote');
-  createWindow(1, windowData, 'quote');
-  createWindow(2, windowData, 'quote');
-  createWindow(3, windowData, 'quote');
-  createWindow(4, windowData, 'quote');
-  createWindow(5, windowData, 'quote');
 });
 //Now, the function will only create and display the window with the specified id. If you want to create multiple windows, just call the createWindow function multiple times with different id values.
 

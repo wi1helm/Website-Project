@@ -2,21 +2,29 @@ let isAnimating = false;
 let animationTimeout;
 let searchDropDownOpen = false;
 
+import { createWindow, reopenWindow, windowList } from './javascript.js';
+
 function animateLinesApart() {
-  console.log("entering");
   if (isAnimating) {
     clearTimeout(animationTimeout);
   }
   if (searchDropDownOpen){
     return
   }
-  const searchElement = document.getElementById("line");
-  searchElement.innerHTML = "";
 
   const input = document.createElement("input");
   const upperLine = document.createElement("hr");
   const lowerLine = document.createElement("hr");
 
+
+  if (!upperLine || !lowerLine || !input) {
+    return;
+  }
+
+  const searchElement = document.getElementById("line");
+  searchElement.innerHTML = "";
+
+  
   upperLine.id = "upperline";
   lowerLine.id = "lowerline";
 
@@ -27,7 +35,6 @@ function animateLinesApart() {
   input.style.display = "none";
   input.style.zIndex = window.highestZIndex;
   const textInput = sessionStorage.getItem("text");
-  console.log(textInput);
   input.value = textInput;
 
   input.addEventListener("input", (event) => {
@@ -66,7 +73,7 @@ function animateLinesApart() {
 }
 
 function animateLinesTogether() {
-  console.log("leave");
+  
   if (isAnimating) {
     clearTimeout(animationTimeout);
   }
@@ -76,8 +83,13 @@ function animateLinesTogether() {
   const lowerLine = document.getElementById("lowerline");
   const input = document.getElementById("search-input");
 
+  
   if (searchDropDownOpen == true) {
-    console.log("obama")
+    
+    return;
+  }
+
+  if (!upperLine || !lowerLine || !input) {
     return;
   }
 
@@ -104,21 +116,46 @@ function animateLinesTogether() {
   }, 300);
 }
 
+function handleSearchAction(searchTerm, windows) {
+  const filteredWindows = windows.filter(window => window.title.toLowerCase() === searchTerm.toLowerCase());
+
+  if (filteredWindows.length > 0) {
+    const windowData = filteredWindows[0];
+    const windowExists = windowList.find(window => window.dataset.windowId === windowData.id);
+    createWindow(windowData.id, windows, "quote");
+  } else {
+    console.log("Does not exist.");
+  }
+}
+
+
+
+
 async function showSearchResults(inputValue) {
-
-  
-
   const response = await fetch("assets/data.json");
   const data = await response.json();
 
+  const searchElement = document.getElementById("line");
+
   const windows = data.windows;
   const searchResults = windows.filter(window => window.title.toLowerCase().includes(inputValue.toLowerCase()));
-  const searchDropdown = document.createElement("div");
-  searchDropdown.id = "search-dropdown";
-  searchDropdown.style.zIndex = "9999";
-  
 
+  let searchDropdown = document.getElementById("search-dropdown");
+
+  // If there's no searchDropdown, create one
+  if (!searchDropdown) {
+    searchDropdown = document.createElement("div");
+    searchDropdown.id = "search-dropdown";
+    searchDropdown.style.zIndex = "9999";
+    searchElement.appendChild(searchDropdown);
+  }
+
+  // Clear the existing searchDropdown content
+  searchDropdown.innerHTML = "";
+
+  const input = document.getElementById("search-input");
   const specificElement = document.getElementById("line");
+  const searchIcon = document.getElementById("search-icon");
 
   // Attach a click event listener to the document
   document.addEventListener("click", (event) => {
@@ -130,25 +167,32 @@ async function showSearchResults(inputValue) {
   }
   });
 
-  for (const result of searchResults) {
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      handleSearchAction(inputValue, windows);
+    }
+  });
+
+  
+  searchIcon.addEventListener("click", () => {
+    handleSearchAction(inputValue, windows);
+  });
+
+
+    for (const result of searchResults) {
     const resultLink = document.createElement("a");
+    resultLink.style.padding = "5px"
     resultLink.textContent = result.title;
-    resultLink.href = "#";
     resultLink.addEventListener("click", () => {
       searchDropdown.remove();
-      const windowExists = windowList.find(window => window.dataset.windowId === result.id);
-      if (windowExists) {
-        reopenWindow(windowExists.UID);
-      } else {
-        const newWindow = createWindow(result.id, windows, "quote");
-        const content = document.getElementById("content");
-        content.appendChild(newWindow);
-      }
+      
+      const windowExists = windowList.find(window => window.dataset.windowId == result.id);
+      createWindow(result.id, windows, "quote");
     });
     searchDropdown.appendChild(resultLink);
   }
 
-  const searchElement = document.getElementById("line");
+  
   searchElement.appendChild(searchDropdown);
 }
 

@@ -19,7 +19,9 @@ body{
 p {
     margin: 0;
 }
-
+a:hover{
+    cursor: pointer;
+}
 
 /*All Content for the navbar*/
 navbar{
@@ -199,12 +201,15 @@ footer{
 .circle:hover{
     cursor: pointer;
 }
-#exit{
-    width: 16px;
-    height: 16px;
-}
 
+.exit{
+    display: flex;
+    flex-direction: row-reverse;
+}
 .C_exit{
+    background-color: orange;
+}
+.C_min{
     background-color: #E85A5A;
 }
 
