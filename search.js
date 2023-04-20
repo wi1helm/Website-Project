@@ -2,7 +2,7 @@ let isAnimating = false;
 let animationTimeout;
 let searchDropDownOpen = false;
 
-import { createWindow, reopenWindow, windowList } from './javascript.js';
+import { createWindow, windowList } from './javascript.js';
 
 function animateLinesApart() {
   if (isAnimating) {
@@ -138,7 +138,7 @@ async function showSearchResults(inputValue) {
   const searchElement = document.getElementById("line");
 
   const windows = data.windows;
-  const searchResults = windows.filter(window => window.title.toLowerCase().includes(inputValue.toLowerCase()));
+  const searchResults = windows.filter(window => window.text.toLowerCase().includes(inputValue.toLowerCase()));
 
   let searchDropdown = document.getElementById("search-dropdown");
 
@@ -182,7 +182,7 @@ async function showSearchResults(inputValue) {
     for (const result of searchResults) {
     const resultLink = document.createElement("a");
     resultLink.style.padding = "5px"
-    resultLink.textContent = result.title;
+    resultLink.textContent = result.text;
     resultLink.addEventListener("click", () => {
       searchDropdown.remove();
       

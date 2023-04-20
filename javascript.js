@@ -14,7 +14,92 @@ function load() {
         return data.windows;
       });
 }
-  
+
+function createWorldsWindow() {
+  // Main window container
+  const windowContainer = document.createElement('div');
+  windowContainer.id = 'window';
+  windowContainer.classList.add('window');
+  windowContainer.style.position = 'absolute';
+  windowContainer.style.top = '10%';
+  windowContainer.style.left = '10%';
+  windowContainer.style.width = '1350px';
+  windowContainer.style.height = '800px';
+
+  // Window bar
+  const windowBar = document.createElement('div');
+  windowBar.classList.add('windowbar');
+  windowContainer.appendChild(windowBar);
+
+  // Title element
+  const title = document.createElement('div');
+  title.classList.add('title');
+  windowBar.appendChild(title);
+
+  // Title paragraph
+  const titleParagraph = document.createElement('p');
+  titleParagraph.style.color = '#17A7B0';
+  titleParagraph.textContent = 'Worlds';
+  title.appendChild(titleParagraph);
+
+  // Exit element
+  const exit = document.createElement('div');
+  exit.classList.add('exit');
+  windowBar.appendChild(exit);
+  windowBar.addEventListener('mousedown', selectWindow);
+  // Exit circles
+  const exitCircleMin = document.createElement('div');
+  exitCircleMin.id = 'exit';
+  exitCircleMin.classList.add('circle', 'C_min');
+  exit.appendChild(exitCircleMin);
+
+  const exitCircleExit = document.createElement('div');
+  exitCircleExit.id = 'exit';
+  exitCircleExit.classList.add('circle', 'C_exit');
+  exit.appendChild(exitCircleExit);
+
+  // Event listeners for exit and minimize circles
+  exitCircleExit.addEventListener('click', () => {
+    closeWindow(windowContainer);
+  });
+
+  exitCircleMin.addEventListener('click', () => {
+    removeWindow(windowContainer);
+  });
+
+  // Window content
+  const windowContent = document.createElement('div');
+  windowContent.classList.add('windowcontent');
+  windowContainer.appendChild(windowContent);
+
+  // World content
+  const worldContent = document.createElement('div');
+  worldContent.classList.add('world-content');
+  windowContent.appendChild(worldContent);
+
+  // World elements
+  for (let i = 0; i < 7; i++) {
+    const world = document.createElement('div');
+    world.classList.add('world');
+    worldContent.appendChild(world);
+
+    // World image
+    const worldImage = document.createElement('img');
+    worldImage.classList.add('world-images');
+    worldImage.src = 'images/unknown.png';
+    world.appendChild(worldImage);
+
+    // World text
+    const worldText = document.createElement('p');
+    worldText.classList.add('world-text');
+    worldText.textContent = 'smp 1';
+    world.appendChild(worldText);
+  }
+
+  return windowContainer;
+}
+
+
 function createQuoteWindow(window) {
     const windowDiv = document.createElement('div');
     windowDiv.setAttribute('id', 'window-' + window.id);
@@ -94,6 +179,11 @@ function createQuoteWindow(window) {
     const dice = document.createElement('img');
     dice.src = 'images/dice.svg';
     dice.id = 'dice';
+    dice.addEventListener('click', () => {
+      const randomId = Math.floor(Math.random() * windowData.length);
+      const randomQuote = windowData[randomId];
+      updateWindowContent(Window, randomQuote);
+    });
     imageDiv.appendChild(dice);
     windowContent.appendChild(imageDiv);
   
@@ -149,7 +239,8 @@ export function createWindow(id, windowData, windowType) {
           
           if (windowType === 'quote') {
               Window = createQuoteWindow(window);
-          } else if (windowType === 'yourWindowType') {
+          } else if (windowType === 'world') {
+              Window = createWorldsWindow(window);
               // Add your own window creation function here
               // Example: quoteWindow = createYourWindowType(window);
           } else {
@@ -157,12 +248,7 @@ export function createWindow(id, windowData, windowType) {
               return;
           }
 
-          const dice = Window.querySelector('#dice');
-          dice.addEventListener('click', () => {
-            const randomId = Math.floor(Math.random() * windowData.length);
-            const randomQuote = windowData[randomId];
-            updateWindowContent(Window, randomQuote);
-          });
+          
           let UID = 23 * window.id / (windowList.length + 1);
 
           const content = document.getElementById("content");
@@ -227,7 +313,7 @@ export function reopenWindow(UID, windowData) {
 
 // Load JSON data and show the first window
 load().then(windowData => {
-  createWindow(0, windowData, 'quote');
+  createWindow(0, windowData, 'world');
 });
 //Now, the function will only create and display the window with the specified id. If you want to create multiple windows, just call the createWindow function multiple times with different id values.
 

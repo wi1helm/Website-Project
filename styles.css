@@ -22,7 +22,9 @@ p {
 a:hover{
     cursor: pointer;
 }
-
+#dice:hover{
+    cursor: pointer;
+}
 /*All Content for the navbar*/
 navbar{
     height: 10%;
@@ -300,4 +302,29 @@ madeby{
     border-color: rgba(23, 167, 176, 0.20);
     top: 80px;
     
+}
+
+.world{
+    margin: 0px;
+    padding: 30px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+.world-content{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+.world-images{
+    width: 200px;
+    height: 250px;
+}
+.world-text{
+    width: 200px;
+    margin: 0;
+    padding: 4px;
 }
