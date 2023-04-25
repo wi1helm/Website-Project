@@ -76,6 +76,38 @@
       "title": "Wilhelm",
       "text": "Förebyggande hjärt- och lungn räddning.",
       "date": "2023-03-02"
+    },
+    {
+      "id": 11,
+      "type": "world",
+      "title": "Worlds",
+      "text": "Worlds"
+    },
+    {
+      "id": 12,
+      "type": "project",
+      "title": "Multiverse Madness",
+      "text": "Multiverse Madness",
+      "images": [
+        "images/multiverse/main-image.png",
+        "images/multiverse/small-1.png",
+        "images/multiverse/small-2.png",
+        "images/multiverse/small-3.png",
+        "images/multiverse/small-4.png"
+      ]
+    },
+    {
+      "id": 13,
+      "type": "project",
+      "title": "Corrupted Tag",
+      "text": "Corrupted Tag",
+      "images": [
+        "images/corrupted/main-image.png",
+        "images/corrupted/small-1.png",
+        "images/corrupted/small-2.png",
+        "images/corrupted/small-3.png",
+        "images/corrupted/small-4.png"
+      ]
     }
   ]
 }

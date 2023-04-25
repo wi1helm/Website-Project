@@ -321,10 +321,53 @@ madeby{
 
 .world-images{
     width: 200px;
-    height: 250px;
+    height: 200px;
+}
+.world-images:hover, .world-text:hover{
+    cursor: pointer;
 }
 .world-text{
     width: 200px;
     margin: 0;
     padding: 4px;
+    
+}
+
+#bigImage {
+    width: 100%;
+    height: 60%;
+    border-radius: 5px;
+  }
+  
+.smallImages {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.smallImages img {
+    border-radius: 5px;
+    padding: 3px;
+    width: 23%;
+    height: auto;
+    cursor: pointer;
+}
+
+.container{
+    display: flex;
+    height: 100%;
+}
+.left{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 55%;
+}
+.right{
+    width: 45%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
 }

@@ -15,16 +15,16 @@ function load() {
       });
 }
 
-function createWorldsWindow() {
+function createProjectsWindow(window) {
   // Main window container
   const windowContainer = document.createElement('div');
   windowContainer.id = 'window';
   windowContainer.classList.add('window');
   windowContainer.style.position = 'absolute';
-  windowContainer.style.top = '10%';
-  windowContainer.style.left = '10%';
-  windowContainer.style.width = '1350px';
-  windowContainer.style.height = '800px';
+  windowContainer.style.top = '10px';
+  windowContainer.style.left = '10px';
+  windowContainer.style.width = '50%';
+  windowContainer.style.height = '90%';
 
   // Window bar
   const windowBar = document.createElement('div');
@@ -39,7 +39,118 @@ function createWorldsWindow() {
   // Title paragraph
   const titleParagraph = document.createElement('p');
   titleParagraph.style.color = '#17A7B0';
-  titleParagraph.textContent = 'Worlds';
+  titleParagraph.textContent = window.title;
+  title.appendChild(titleParagraph);
+
+  // Exit element
+  const exit = document.createElement('div');
+  exit.classList.add('exit');
+  windowBar.appendChild(exit);
+  windowBar.addEventListener('mousedown', selectWindow);
+  // Exit circles
+  const exitCircleMin = document.createElement('div');
+  exitCircleMin.id = 'exit';
+  exitCircleMin.classList.add('circle', 'C_min');
+  exit.appendChild(exitCircleMin);
+
+  const exitCircleExit = document.createElement('div');
+  exitCircleExit.id = 'exit';
+  exitCircleExit.classList.add('circle', 'C_exit');
+  exit.appendChild(exitCircleExit);
+
+  // Event listeners for exit and minimize circles
+  exitCircleExit.addEventListener('click', () => {
+    closeWindow(windowContainer);
+  });
+
+  exitCircleMin.addEventListener('click', () => {
+    removeWindow(windowContainer);
+  });
+
+  // Window content
+  const windowContent = document.createElement('div');
+  windowContent.classList.add('windowcontent');
+  windowContainer.appendChild(windowContent);
+
+  // Container for the image display and text
+  const imageDisplayContainer = document.createElement('div');
+  imageDisplayContainer.classList.add('container');
+  windowContent.appendChild(imageDisplayContainer);
+
+  // Left side with the images
+  const left = document.createElement('div');
+  left.classList.add('left');
+  imageDisplayContainer.appendChild(left);
+
+  // Big image
+  const bigImage = document.createElement('img');
+  bigImage.id = 'bigImage';
+  bigImage.src = window.images[0]; // Set the big image source to the first image in the array
+  bigImage.alt = 'Big image';
+  left.appendChild(bigImage);
+
+  // Small images container
+  const smallImages = document.createElement('div');
+  smallImages.classList.add('smallImages');
+  left.appendChild(smallImages);
+
+  // Small images
+  for (let i = 1; i <= 4; i++) {
+    const smallImage = document.createElement('img');
+    smallImage.src = window.images[i]; // Set the small image sources to the corresponding images in the array
+    smallImage.alt = `Small image ${i}`;
+    smallImage.onclick = function () {
+      switchImage(smallImage);
+    };
+    smallImages.appendChild(smallImage);
+  }
+
+  // Right side with the text
+  const right = document.createElement('div');
+  right.classList.add('right');
+  imageDisplayContainer.appendChild(right);
+
+  // Text on the right side
+  const text = document.createElement('h1');
+  text.textContent = window.title;
+  right.appendChild(text);
+
+  return windowContainer;
+}
+
+function switchImage(smallImage) {
+  const bigImage = document.getElementById('bigImage');
+  const tempSrc = smallImage.src;
+  smallImage.src = bigImage.src;
+  bigImage.src = tempSrc;
+}
+
+
+function createWorldsWindow(window) {
+  // Main window container
+  const windowContainer = document.createElement('div');
+  windowContainer.id = 'window';
+  windowContainer.classList.add('window');
+  windowContainer.style.position = 'absolute';
+  windowContainer.style.top = '10%';
+  windowContainer.style.left = '10%';
+  windowContainer.style.width = '70%';
+  windowContainer.style.height = '50%';
+
+  // Window bar
+  const windowBar = document.createElement('div');
+  windowBar.classList.add('windowbar');
+  windowContainer.appendChild(windowBar);
+
+  // Title element
+  const title = document.createElement('div');
+  title.classList.add('title');
+  windowBar.appendChild(title);
+
+  // Title paragraph
+  const titleParagraph = document.createElement('p');
+  titleParagraph.style.color = '#17A7B0';
+  titleParagraph.textContent = window.title;
   title.appendChild(titleParagraph);
 
   // Exit element
@@ -77,24 +188,42 @@ function createWorldsWindow() {
   worldContent.classList.add('world-content');
   windowContent.appendChild(worldContent);
 
-  // World elements
-  for (let i = 0; i < 7; i++) {
-    const world = document.createElement('div');
-    world.classList.add('world');
-    worldContent.appendChild(world);
+// World elements
+for (let i = 0; i < 3; i++) {
+  const world = document.createElement('div');
+  world.classList.add('world');
+  worldContent.appendChild(world);
 
-    // World image
-    const worldImage = document.createElement('img');
-    worldImage.classList.add('world-images');
-    worldImage.src = 'images/unknown.png';
-    world.appendChild(worldImage);
+  // Create anchor element
+  const anchor = document.createElement('a');
+  anchor.target = '_blank'; // Open link in a new tab
+  world.appendChild(anchor);
 
-    // World text
-    const worldText = document.createElement('p');
-    worldText.classList.add('world-text');
-    worldText.textContent = 'smp 1';
-    world.appendChild(worldText);
+  // World image
+  const worldImage = document.createElement('img');
+  worldImage.classList.add('world-images');
+  anchor.appendChild(worldImage);
+
+  // World text
+  const worldText = document.createElement('p');
+  worldText.classList.add('world-text');
+  worldText.style.color = "#17A7B0";
+  anchor.appendChild(worldText);
+
+  if (i == 0) {
+    worldImage.src = 'images/skolsmp.png';
+    worldText.textContent = 'NTI Smp 2021';
+    anchor.href = 'https://www.mediafire.com/file/70kmvhhpehepi6t/Smp_2021.zip/file';
+  } else if (i == 1) {
+    worldImage.src = 'images/smp4.png';
+    worldText.textContent = 'Smp4 2022';
+    anchor.href = 'https://www.mediafire.com/file/v1e536dsyzmxbsy/world.zip/file';
+  } else if (i == 2) {
+    worldImage.src = 'images/prison.png';
+    worldText.textContent = 'Prison 2020';
+    anchor.href = 'https://www.bop.gov/';
   }
+}
 
   return windowContainer;
 }
@@ -241,8 +370,9 @@ export function createWindow(id, windowData, windowType) {
               Window = createQuoteWindow(window);
           } else if (windowType === 'world') {
               Window = createWorldsWindow(window);
-              // Add your own window creation function here
-              // Example: quoteWindow = createYourWindowType(window);
+          
+          } else if (windowType === "project"){
+              Window = createProjectsWindow(window);
           } else {
               console.error('Unknown window type:', windowType);
               return;
@@ -261,8 +391,8 @@ export function createWindow(id, windowData, windowType) {
 
           // Apply an offset to the window's position
           const positionOffset = 20 * createdWindows;
-          Window.style.left = `calc(20% + ${positionOffset}px)`;
-          Window.style.top = `calc(20% + ${positionOffset}px)`;
+          Window.style.left = `calc(${Window.style.left} + ${positionOffset}px)`;
+          Window.style.top = `calc(${Window.style.top} + ${positionOffset}px)`;
           createdWindows++; // Increment the created windows counter
           windowList.push(Window);
   
@@ -313,7 +443,7 @@ export function reopenWindow(UID, windowData) {
 
 // Load JSON data and show the first window
 load().then(windowData => {
-  createWindow(0, windowData, 'world');
+  createWindow(13, windowData, 'project');
 });
 //Now, the function will only create and display the window with the specified id. If you want to create multiple windows, just call the createWindow function multiple times with different id values.
 

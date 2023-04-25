@@ -122,7 +122,7 @@ function handleSearchAction(searchTerm, windows) {
   if (filteredWindows.length > 0) {
     const windowData = filteredWindows[0];
     const windowExists = windowList.find(window => window.dataset.windowId === windowData.id);
-    createWindow(windowData.id, windows, "quote");
+    createWindow(windowData.id, windows, windowData.type);
   } else {
     console.log("Does not exist.");
   }
@@ -170,6 +170,8 @@ async function showSearchResults(inputValue) {
   input.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       handleSearchAction(inputValue, windows);
+      searchDropDownOpen = false;
+      animateLinesTogether();
     }
   });
 
@@ -187,7 +189,7 @@ async function showSearchResults(inputValue) {
       searchDropdown.remove();
       
       const windowExists = windowList.find(window => window.dataset.windowId == result.id);
-      createWindow(result.id, windows, "quote");
+      createWindow(result.id, windows, result.type);
     });
     searchDropdown.appendChild(resultLink);
   }
