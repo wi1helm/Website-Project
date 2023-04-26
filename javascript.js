@@ -111,9 +111,17 @@ function createProjectsWindow(window) {
   imageDisplayContainer.appendChild(right);
 
   // Text on the right side
-  const text = document.createElement('h1');
-  text.textContent = window.title;
-  right.appendChild(text);
+  const info_title = document.createElement('h1');
+  const info = document.createElement('p');
+  const info_container = document.createElement("div");
+
+  info_container.classList.add("info_container")
+  info.textContent = window.info;
+  info_title.textContent = window.title;
+  right.appendChild(info_title);
+  info_container.appendChild(info);
+  right.appendChild(info_container);
+
 
   return windowContainer;
 }
@@ -134,7 +142,7 @@ function createWorldsWindow(window) {
   windowContainer.style.position = 'absolute';
   windowContainer.style.top = '10%';
   windowContainer.style.left = '10%';
-  windowContainer.style.width = '70%';
+  windowContainer.style.width = '50%';
   windowContainer.style.height = '50%';
 
   // Window bar
@@ -207,7 +215,8 @@ for (let i = 0; i < 3; i++) {
   // World text
   const worldText = document.createElement('p');
   worldText.classList.add('world-text');
-  worldText.style.color = "#17A7B0";
+  worldText.style.color = "#FFFFFF";
+  
   anchor.appendChild(worldText);
 
   if (i == 0) {

@@ -306,14 +306,15 @@ madeby{
 
 .world{
     margin: 0px;
-    padding: 30px;
     padding-bottom: 5px;
     text-align: center;
 }
 .world-content{
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
     
@@ -322,15 +323,15 @@ madeby{
 .world-images{
     width: 200px;
     height: 200px;
-}
-.world-images:hover, .world-text:hover{
     cursor: pointer;
 }
+
 .world-text{
-    width: 200px;
-    margin: 0;
-    padding: 4px;
-    
+    color: white;
+    font-family: "Segoe UI";
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;   
 }
 
 #bigImage {
@@ -356,6 +357,7 @@ madeby{
 .container{
     display: flex;
     height: 100%;
+    
 }
 .left{
     height: 100%;
@@ -366,8 +368,15 @@ madeby{
     width: 55%;
 }
 .right{
+    padding: 15px;
     width: 45%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.info_container{
+    color: white;
+    margin-top: 100px;
 }
