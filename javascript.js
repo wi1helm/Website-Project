@@ -3,8 +3,8 @@ let createdWindows = 0;
 let currentWindow = null;
 window.highestZIndex = 0;
 let offset = { x: 0, y: 0 };
-
-
+let bigImageCounter = 0;
+let currentBigImageID = null;
 
 function load() {
     return fetch('assets/data.json')
@@ -13,6 +13,66 @@ function load() {
         // Get window data from JSON
         return data.windows;
       });
+}
+
+function createContactsWindow(window) {
+  // Main window container
+  const windowContainer = document.createElement('div');
+  windowContainer.id = 'window';
+  windowContainer.classList.add('window');
+  windowContainer.style.position = 'absolute';
+  windowContainer.style.top = '10px';
+  windowContainer.style.left = '10px';
+  windowContainer.style.width = '50%';
+  windowContainer.style.height = '90%';
+
+  // Window bar
+  const windowBar = document.createElement('div');
+  windowBar.classList.add('windowbar');
+  windowContainer.appendChild(windowBar);
+
+  // Title element
+  const title = document.createElement('div');
+  title.classList.add('title');
+  windowBar.appendChild(title);
+
+  // Title paragraph
+  const titleParagraph = document.createElement('p');
+  titleParagraph.style.color = '#17A7B0';
+  titleParagraph.textContent = window.title;
+  title.appendChild(titleParagraph);
+
+  // Exit element
+  const exit = document.createElement('div');
+  exit.classList.add('exit');
+  windowBar.appendChild(exit);
+  windowBar.addEventListener('mousedown', selectWindow);
+  // Exit circles
+  const exitCircleMin = document.createElement('div');
+  exitCircleMin.id = 'exit';
+  exitCircleMin.classList.add('circle', 'C_min');
+  exit.appendChild(exitCircleMin);
+
+  const exitCircleExit = document.createElement('div');
+  exitCircleExit.id = 'exit';
+  exitCircleExit.classList.add('circle', 'C_exit');
+  exit.appendChild(exitCircleExit);
+
+  // Event listeners for exit and minimize circles
+  exitCircleExit.addEventListener('click', () => {
+    closeWindow(windowContainer);
+  });
+
+  exitCircleMin.addEventListener('click', () => {
+    removeWindow(windowContainer);
+  });
+
+  // Window content
+  const windowContent = document.createElement('div');
+  windowContent.classList.add('windowcontent');
+  windowContainer.appendChild(windowContent);
+
+  return windowContainer;
 }
 
 function createProjectsWindow(window) {
@@ -84,9 +144,17 @@ function createProjectsWindow(window) {
 
   // Big image
   const bigImage = document.createElement('img');
-  bigImage.id = 'bigImage';
   bigImage.src = window.images[0]; // Set the big image source to the first image in the array
   bigImage.alt = 'Big image';
+  bigImage.id = "bigImage" + bigImageCounter;
+  bigImage.style.width = "100%";
+  bigImage.style.height = "60%";
+  bigImage.style.borderRadius = "5px";
+
+  bigImageCounter++;
+
+  // Set the current big image ID
+  currentBigImageID = bigImage.id;
   left.appendChild(bigImage);
 
   // Small images container
@@ -99,6 +167,7 @@ function createProjectsWindow(window) {
     const smallImage = document.createElement('img');
     smallImage.src = window.images[i]; // Set the small image sources to the corresponding images in the array
     smallImage.alt = `Small image ${i}`;
+    smallImage.bigID = currentBigImageID
     smallImage.onclick = function () {
       switchImage(smallImage);
     };
@@ -127,7 +196,7 @@ function createProjectsWindow(window) {
 }
 
 function switchImage(smallImage) {
-  const bigImage = document.getElementById('bigImage');
+  const bigImage = document.getElementById(smallImage.bigID);
   const tempSrc = smallImage.src;
   smallImage.src = bigImage.src;
   bigImage.src = tempSrc;
@@ -382,6 +451,8 @@ export function createWindow(id, windowData, windowType) {
           
           } else if (windowType === "project"){
               Window = createProjectsWindow(window);
+          } else if (windowType === "contact"){
+              Window = createContactsWindow(window);
           } else {
               console.error('Unknown window type:', windowType);
               return;
@@ -412,7 +483,7 @@ export function createWindow(id, windowData, windowType) {
 
           break;
       }
-  }
+  }   
 }
 
 function removeWindow(windowElement){
@@ -452,7 +523,7 @@ export function reopenWindow(UID, windowData) {
 
 // Load JSON data and show the first window
 load().then(windowData => {
-  createWindow(13, windowData, 'project');
+  createWindow(14, windowData, 'contact');
 });
 //Now, the function will only create and display the window with the specified id. If you want to create multiple windows, just call the createWindow function multiple times with different id values.
 
@@ -468,6 +539,9 @@ function selectWindow(event) {
     offset.y = event.clientY - bounds.top + bodyBounds.top + 90;
     document.addEventListener('mousemove', moveWindow);
     document.addEventListener('mouseup', releaseWindow);
+    // Assuming 'selectedWindow' is the window element you just clicked/selected
+    currentBigImageID = selectedWindow.getAttribute('data-big-image-id');
+
 }
   
 function moveWindow(event) {
@@ -490,3 +564,4 @@ function releaseWindow(event) {
     document.removeEventListener('mouseup', releaseWindow);
   }
 
+  
