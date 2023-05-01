@@ -5,7 +5,7 @@ window.highestZIndex = 0;
 let offset = { x: 0, y: 0 };
 let bigImageCounter = 0;
 let currentBigImageID = null;
-
+let dataWindow;
 function load() {
     return fetch('assets/data.json')
       .then(response => response.json())
@@ -69,12 +69,52 @@ function createContactsWindow(window) {
 
   // Window content
   const windowContent = document.createElement('div');
+  windowContent.id = "contact-w-content"
   windowContent.classList.add('windowcontent');
   windowContainer.appendChild(windowContent);
 
+  const leftContact = document.createElement('div');
+  leftContact.id = "left-column";
+  windowContent.appendChild(leftContact)
+
+  const rightContact = document.createElement('div');
+  rightContact.id = "right-column";
+  windowContent.appendChild(rightContact)
+
+  // Contact image
+  const contactImage = document.createElement('img');
+  contactImage.id = "main-image"
+  contactImage.src = window.imageURL;
+  contactImage.alt = `${window.name}'s image`;
+  leftContact.appendChild(contactImage);
+
+  // Contact name
+  const contactName = document.createElement('h2');
+  contactName.textContent = window.name;
+  rightContact.appendChild(contactName);
+
+  // Contact info
+  const contactInfo = document.createElement('p');
+  contactInfo.textContent = window.info;
+  rightContact.appendChild(contactInfo);
+
+  // Social media container
+  const socialMediaContainer = document.createElement('div');
+  socialMediaContainer.classList.add('social-media');
+  rightContact.appendChild(socialMediaContainer);
+
+  // Social media links
+  window.socialMediaLinks.forEach((link) => {
+    const socialMediaLink = document.createElement('a');
+    socialMediaLink.href = link.url;
+    socialMediaLink.textContent = link.name;
+    socialMediaLink.target = '_blank';
+    socialMediaLink.style.marginRight = '10px';
+    socialMediaContainer.appendChild(socialMediaLink);
+  });
+
   return windowContainer;
 }
-
 function createProjectsWindow(window) {
   // Main window container
   const windowContainer = document.createElement('div');
@@ -387,9 +427,9 @@ function createQuoteWindow(window) {
     dice.src = 'images/dice.svg';
     dice.id = 'dice';
     dice.addEventListener('click', () => {
-      const randomId = Math.floor(Math.random() * windowData.length);
-      const randomQuote = windowData[randomId];
-      updateWindowContent(Window, randomQuote);
+      const randomId = getRandomNumber(1,10);
+      const randomQuote = dataWindow[randomId];
+      updateWindowContent(windowDiv, randomQuote);
     });
     imageDiv.appendChild(dice);
     windowContent.appendChild(imageDiv);
@@ -399,7 +439,6 @@ function createQuoteWindow(window) {
   
     return windowDiv;
   }
-
 
 function createActionBarElement(windowData, UID) {
     const actionBarElement = document.createElement('div');
@@ -422,6 +461,8 @@ function createActionBarElement(windowData, UID) {
 }
 
 function updateWindowContent(Window, quoteData) {
+  console.log(quoteData);
+  console.log(Window);
   const titleElement = Window.querySelector('.title p');
   const textElement = Window.querySelector('.windowcontent h1');
   const dateElement = Window.querySelector('.windowcontent #date');
@@ -444,7 +485,7 @@ export function createWindow(id, windowData, windowType) {
           let Window;
 
           
-          if (windowType === 'quote') {
+          if (windowType === 'qvoute') {
               Window = createQuoteWindow(window);
           } else if (windowType === 'world') {
               Window = createWorldsWindow(window);
@@ -521,12 +562,56 @@ export function reopenWindow(UID, windowData) {
   }
 }
 
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 // Load JSON data and show the first window
 load().then(windowData => {
-  createWindow(14, windowData, 'contact');
-});
-//Now, the function will only create and display the window with the specified id. If you want to create multiple windows, just call the createWindow function multiple times with different id values.
+  dataWindow = windowData
+  const currentPage = window.location.pathname.split('/').pop();
 
+  switch (currentPage) {
+    case 'index.html':
+      createWindowHome(windowData);
+      break;
+    case 'qvoutes.html':
+      createWindowQvoutes(windowData);
+      break;
+    case 'projects.html':
+      createWindowProject(windowData);
+      break;
+    case 'worlds.html':
+      createWindowWorlds(windowData);
+      break;
+    case 'contact.html':
+      createWindowContact(windowData);
+      break;
+    default:
+      console.error('Unexpected page:', currentPage);
+  }
+
+  
+});
+
+function createWindowHome(windowData) {}
+
+function createWindowQvoutes(windowData) {
+  const min = 1;
+  const max = 10;
+  const randomValue = getRandomNumber(min, max);
+  createWindow(randomValue, windowData, 'qvoute');
+}
+
+function createWindowProject(windowData) {
+  createWindow(12, windowData, 'project');
+}
+function createWindowWorlds(windowData) {
+  createWindow(11, windowData, 'world');
+}
+function createWindowContact(windowData) {
+  createWindow(14, windowData, 'contact');
+}
 
 
 function selectWindow(event) {
@@ -540,7 +625,7 @@ function selectWindow(event) {
     document.addEventListener('mousemove', moveWindow);
     document.addEventListener('mouseup', releaseWindow);
     // Assuming 'selectedWindow' is the window element you just clicked/selected
-    currentBigImageID = selectedWindow.getAttribute('data-big-image-id');
+    currentBigImageID = currentWindow.getAttribute('data-big-image-id');
 
 }
   

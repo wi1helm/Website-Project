@@ -2,77 +2,77 @@
   "windows": [
     {
       "id": 0,
-      "type": "quote",
+      "type": "qvoute",
       "title": "Wilhelm",
       "text": "När börjar eftermiddagen i Gävle?",
       "date": "2023-02-23"
     },
     {
       "id": 1,
-      "type": "quote",
+      "type": "qvoute",
       "title": "Wilhelm",
       "text": "Om 50% av killarna är ihop och 50% av tjejerna är ihop med någon. Person: det betyder att 25% av alla i världen är ihop. Hamburgare och semlor har samma färg.",
       "date": "2023-02-23"
     },
     {
       "id": 2,
-      "type": "quote",
+      "type": "qvoute",
       "title": "Wilhelm",
       "text": "Kort pris.",
       "date": "2023-02-23"
     },
     {
       "id": 3,
-      "type": "quote",
+      "type": "qvoute",
       "title": "Antoni",
       "text": "Du utmanar ödet. Wilhelm: Jag tror ej på ödet så ez win.",
       "date": "2023-02-23"
     },
     {
       "id": 4,
-      "type": "quote",
+      "type": "qvoute",
       "title": "Wilhelm",
       "text": "Men min mus åker ut ur skärmen. Stop it.",
       "date": "2023-02-25"
     },
     {
       "id": 5,
-      "type": "quote",
+      "type": "qvoute",
       "title": "Antoni",
       "text": "Kan vi inte kasta ner en eldpil där? Wilhelm: Jag är så blind att du missar dina spjut du kastar.",
       "date": "2023-02-25"
     },
     {
       "id": 6,
-      "type": "quote",
+      "type": "qvoute",
       "title": "Wilhelm",
       "text": "Jag pussade hans inälvor. Snicon: Kinky.",
       "date": "2023-02-25"
     },
     {
       "id": 7,
-      "type": "quote",
+      "type": "qvoute",
       "title": "Wilhelm",
       "text": "Hur mycket papper behöver jag lägga ner i pappersinsamlingen för att den ska producera en stol?",
       "date": "2023-02-27"
     },
     {
       "id": 8,
-      "type": "quote",
+      "type": "qvoute",
       "title": "Wilhelm",
       "text": "Positiv negativa tal är glada negativa tal.",
       "date": "2023-02-27"
     },
     {
       "id": 9,
-      "type": "quote",
+      "type": "qvoute",
       "title": "Wilhelm",
       "text": "Du tar filmklippet bakifrån och jag tar det framifrån.",
       "date": "2023-02-27"
     },
     {
       "id": 10,
-      "type": "quote",
+      "type": "qvoute",
       "title": "Wilhelm",
       "text": "Förebyggande hjärt- och lungn räddning.",
       "date": "2023-03-02"
@@ -114,8 +114,15 @@
     {
       "id": 14,
       "type": "contact",
-      "title": "Wilhelm",
-      "text": "Contact ME"
+      "title": "Contact Info",
+      "name": "Juan Bahama",
+      "text": "Juan Bahama",
+      "imageURL": "images/juan_bahama.png",
+      "info": "I am an experienced project manager with over 10 years of expertise in various industries, including IT, construction, and finance. My excellent communication skills, effective problem-solving abilities, and strong leadership qualities have helped me ensure project success. I am committed to building productive teams, fostering positive work environments, and delivering projects on time and within budget. In my spare time, I enjoy traveling, reading about new technologies, and spending time with my family.",
+      "socialMediaLinks": [
+        { "name": "LinkedIn", "url": "https://linkedin.com/in/juanbahama" },
+        { "name": "Twitter", "url": "https://twitter.com/juanbahama" }
+      ]
     }
   ]
 }

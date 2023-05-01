@@ -376,3 +376,29 @@ madeby{
     color: white;
     margin-top: 100px;
 }
+
+
+
+#contact-w-content{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+#left-column{
+    padding: 15px;
+    width: 50%;
+}
+#right-column{
+    padding: 15px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
