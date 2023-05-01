@@ -26,7 +26,7 @@ a:hover{
     cursor: pointer;
 }
 /*All Content for the navbar*/
-navbar{
+#navbar{
     height: 10%;
     width: 100%;
     padding-top: 10px;
@@ -42,7 +42,7 @@ empty{
 }
 
 
-navbar navbuttons{
+#navbar #navbuttons{
     height: 100%;
     width: 30%;
     display: flex;
@@ -111,7 +111,7 @@ h2, h1, a{
 }
 
 
-navbar navsearch{
+#navbar #navsearch{
     height: 100%;
     width: 35%;
     display: flex;
@@ -245,7 +245,7 @@ footer{
 }
 
 
-madeby{
+#madeby{
     width: 10%;
     color: #868A8A;
     display: flex;
