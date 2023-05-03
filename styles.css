@@ -402,3 +402,17 @@ footer{
     height: 100%;
     object-fit: cover;
   }
+
+
+@media screen and (max-width: 1600px) {
+    #empty{
+        width: 0px;
+        display: none;
+    }
+    #navbar #navbuttons{
+        width: 60%;
+    }
+    #navbar #navsearch{
+        width: 40%;
+    }
+  }

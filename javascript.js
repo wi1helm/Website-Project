@@ -59,11 +59,11 @@ function createContactsWindow(window) {
   exit.appendChild(exitCircleExit);
 
   // Event listeners for exit and minimize circles
-  exitCircleExit.addEventListener('click', () => {
+  exitCircleExit.addEventListener('mousedown', () => {
     closeWindow(windowContainer);
   });
 
-  exitCircleMin.addEventListener('click', () => {
+  exitCircleMin.addEventListener('mousedown', () => {
     removeWindow(windowContainer);
   });
 
@@ -159,11 +159,11 @@ function createProjectsWindow(window) {
   exit.appendChild(exitCircleExit);
 
   // Event listeners for exit and minimize circles
-  exitCircleExit.addEventListener('click', () => {
+  exitCircleExit.addEventListener('mousedown', () => {
     closeWindow(windowContainer);
   });
 
-  exitCircleMin.addEventListener('click', () => {
+  exitCircleMin.addEventListener('mousedown', () => {
     removeWindow(windowContainer);
   });
 
@@ -287,11 +287,11 @@ function createWorldsWindow(window) {
   exit.appendChild(exitCircleExit);
 
   // Event listeners for exit and minimize circles
-  exitCircleExit.addEventListener('click', () => {
+  exitCircleExit.addEventListener('mousedown', () => {
     closeWindow(windowContainer);
   });
 
-  exitCircleMin.addEventListener('click', () => {
+  exitCircleMin.addEventListener('mousedown', () => {
     removeWindow(windowContainer);
   });
 
@@ -373,7 +373,7 @@ function createQuoteWindow(window) {
     exitCircle.classList.add('C_exit');
     exitCircle.classList.add('circle');
     exitCircle.id = 'exit';
-    exitCircle.addEventListener('click', () => {
+    exitCircle.addEventListener('mousedown', () => {
       closeWindow(windowDiv);
       
     });
@@ -381,7 +381,7 @@ function createQuoteWindow(window) {
     minCircle.classList.add('C_min');
     minCircle.classList.add('circle');
     minCircle.id = 'exit';
-    minCircle.addEventListener('click', () => {
+    minCircle.addEventListener('mousedown', () => {
       removeWindow(windowDiv);
       
     });
@@ -621,7 +621,7 @@ function selectWindow(event) {
     const bounds = currentWindow.getBoundingClientRect();
     const bodyBounds = document.body.getBoundingClientRect();
     offset.x = event.clientX - bounds.left + bodyBounds.left;
-    offset.y = event.clientY - bounds.top + bodyBounds.top + 90;
+    offset.y = event.clientY - bounds.top + bodyBounds.top + 111;
     document.addEventListener('mousemove', moveWindow);
     document.addEventListener('mouseup', releaseWindow);
     // Assuming 'selectedWindow' is the window element you just clicked/selected
@@ -635,8 +635,8 @@ function moveWindow(event) {
         const maxWidth = window.innerWidth - windowRect.width;
         const maxHeight = window.innerHeight - windowRect.height;
         const left = Math.max(0, Math.min(maxWidth, event.clientX - offset.x));
-        const top = Math.max(0, Math.min(maxHeight, event.clientY - offset.y));
-
+        const top = Math.max(0, Math.min(maxHeight - 140, event.clientY - offset.y)) ;
+        console.log(top)
         currentWindow.style.left = left + 'px';
         currentWindow.style.top = top + 'px';
     }
