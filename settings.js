@@ -7,7 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const settingsIcon = document.getElementById("settings-icon");
   settingsIcon.addEventListener("click", () => {
-    toggleSettingsContainer();
+    toggleSettingsContainer(false);
+  });
+  const settingsIconFooter = document.getElementById("settings-icon-footer");
+  settingsIconFooter.addEventListener("click", () => {
+    toggleSettingsContainer(true);
+    console.log("footer settings")
   });
 
   function createActionBarCircles() {
@@ -33,35 +38,71 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  function toggleSettingsContainer() {
+  function toggleSettingsContainer(mobile) {
     let settingsContainer = document.getElementById("settings-container");
+    let settingsContainerFooter = document.getElementById("settings-container-footer")
 
-    if (!settingsContainer) {
-      settingsContainer = document.createElement("div");
-      settingsContainer.id = "settings-container";
-      settingsContainer.style.zIndex = window.highestZIndex;
-      const favoriteColorsDiv = document.createElement("div");
-      favoriteColorsDiv.id = "favorite-colors";
-
-      const text = document.createElement("p");
-      text.id = "text";
-      text.textContent = "Color Schemes";
-
-      const circleColorsDiv = document.createElement("div");
-      circleColorsDiv.id = "circle-colors";
-
-      const settingsMenuCircles = createSettingsMenuCircles();
-      addCirclesToDiv(settingsMenuCircles, circleColorsDiv);
-
-      favoriteColorsDiv.appendChild(text);
-      favoriteColorsDiv.appendChild(circleColorsDiv);
-      settingsContainer.appendChild(favoriteColorsDiv);
-
-      document.body.appendChild(settingsContainer);
-      document.addEventListener("click", closeSettingsContainerOnClickOutside);
-    } else {
+    if (settingsContainer) {
       settingsContainer.remove();
       document.removeEventListener("click", closeSettingsContainerOnClickOutside);
+    }
+    if (settingsContainerFooter) {
+      settingsContainerFooter.remove();
+      document.removeEventListener("click", closeSettingsContainerOnClickOutside);
+    }
+
+
+
+    if (!settingsContainer && !settingsContainerFooter) {
+      if (mobile == false){
+        settingsContainer = document.createElement("div");
+        settingsContainer.id = "settings-container";
+        settingsContainer.style.zIndex = window.highestZIndex;
+        const favoriteColorsDiv = document.createElement("div");
+        favoriteColorsDiv.id = "favorite-colors";
+
+        const text = document.createElement("p");
+        text.id = "text";
+        text.textContent = "Color Schemes";
+
+        const circleColorsDiv = document.createElement("div");
+        circleColorsDiv.id = "circle-colors";
+
+        const settingsMenuCircles = createSettingsMenuCircles();
+        addCirclesToDiv(settingsMenuCircles, circleColorsDiv);
+
+        favoriteColorsDiv.appendChild(text);
+        favoriteColorsDiv.appendChild(circleColorsDiv);
+        settingsContainer.appendChild(favoriteColorsDiv);
+
+        document.body.appendChild(settingsContainer);
+        document.addEventListener("click", closeSettingsContainerOnClickOutside);
+      }
+      if (mobile == true){
+        console.log("fgf")
+        settingsContainer = document.createElement("div");
+        settingsContainer.id = "settings-container-footer";
+        settingsContainer.style.zIndex = window.highestZIndex;
+        const favoriteColorsDiv = document.createElement("div");
+        favoriteColorsDiv.id = "favorite-colors";
+
+        const text = document.createElement("p");
+        text.id = "text";
+        text.textContent = "Color Schemes";
+
+        const circleColorsDiv = document.createElement("div");
+        circleColorsDiv.id = "circle-colors";
+
+        const settingsMenuCircles = createSettingsMenuCircles();
+        addCirclesToDiv(settingsMenuCircles, circleColorsDiv);
+
+        favoriteColorsDiv.appendChild(text);
+        favoriteColorsDiv.appendChild(circleColorsDiv);
+        settingsContainer.appendChild(favoriteColorsDiv);
+
+        document.body.appendChild(settingsContainer);
+        document.addEventListener("click", closeSettingsContainerOnClickOutside);
+      }
     }
   }
 
@@ -78,12 +119,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function closeSettingsContainerOnClickOutside(event) {
+    
     const settingsContainer = document.getElementById("settings-container");
-    if (settingsContainer && !settingsContainer.contains(event.target) && event.target !== settingsIcon) {
+    const settingsContainerFooter = document.getElementById("settings-container-footer");
+    const settingsIcon = document.getElementById("settings-icon");
+    const settingsIconFooter = document.getElementById("settings-icon-footer");
+    if (
+      settingsContainer &&
+      !settingsContainer.contains(event.target) &&
+      event.target !== settingsIcon
+    ) {
       settingsContainer.remove();
       document.removeEventListener("click", closeSettingsContainerOnClickOutside);
     }
+  
+    if (
+      settingsContainerFooter &&
+      !settingsContainerFooter.contains(event.target) &&
+      event.target !== settingsIconFooter
+    ) {
+      console.log("obama")
+      settingsContainerFooter.remove();
+      document.removeEventListener("click", closeSettingsContainerOnClickOutside);
+    }
   }
+  
 });
 
 async function changeColor(event, index) {
