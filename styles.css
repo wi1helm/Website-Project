@@ -422,8 +422,20 @@ footer{
 #search-icon-footer{
     display: none;
 }
-
-@media screen and (max-width: 1500px) {
+@media screen and (max-width: 1700px) {
+    #empty{
+        width: 0px;
+        display: none;
+    }
+    #navbar{
+        justify-content: space-evenly;
+        }
+    #navbar #navbuttons{
+    
+        width: 50%;
+    }
+}
+@media screen and (max-width: 1000px) {
     #empty{
         width: 0px;
         display: none;
@@ -468,7 +480,8 @@ footer{
         margin-top: 20px;
     }
     #search-icon-footer{
-        padding: 20px;
+        display: block;
+        padding: 40px;
         width: 60px;
         height: 60px;
     }
@@ -486,5 +499,16 @@ footer{
         align-items: center;
         justify-content: end;
         width: 100%;
+    }
+    #search-input{
+        height: 40px;
+        width: 100%;
+        font-size: 30px;
+        text-decoration: none;
+        border: none;
+        background: transparent;
+        color: white;
+        outline: none;
+    
     }
   }

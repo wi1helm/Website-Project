@@ -63,13 +63,23 @@ function animateLinesApart() {
 
   isAnimating = true;
   animationTimeout = setTimeout(() => {
+    if (isScreenSizeLessThan()){
+    upperLine.style.transform = "translateY(-48px)";
+    lowerLine.style.transform = "translateY(48px)";
+    }
+    else{
     upperLine.style.transform = "translateY(-24px)";
     lowerLine.style.transform = "translateY(24px)";
+    }
     input.style.display = "block";
     input.setAttribute("placeholder", "Search");
     input.autocomplete = "off"
     isAnimating = false;
   }, 50);
+}
+
+function isScreenSizeLessThan() {
+  return window.innerWidth < 1000;
 }
 
 function animateLinesTogether() {
@@ -163,6 +173,9 @@ async function showSearchResults(inputValue) {
     if (!specificElement.contains(event.target)) {
       searchDropDownOpen = false;
       animateLinesTogether();
+      const hrElement = document.getElementById("line");
+      hrElement.addEventListener("mouseenter", animateLinesApart);
+      hrElement.addEventListener("mouseleave", animateLinesTogether);
       // Perform any action you want when a click occurs outside the specific element
   }
   });
@@ -198,12 +211,17 @@ async function showSearchResults(inputValue) {
   searchElement.appendChild(searchDropdown);
 }
 
-
+function openSearch(){
+  const hrElement = document.getElementById("line");
+  hrElement.removeEventListener("mouseenter", animateLinesApart);
+  animateLinesApart();
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const hrElement = document.getElementById("line");
-
+  const searchFooter = document.getElementById("search-icon-footer");
   hrElement.addEventListener("mouseenter", animateLinesApart);
   hrElement.addEventListener("mouseleave", animateLinesTogether);
+  searchFooter.addEventListener("click", openSearch)
 });
 
