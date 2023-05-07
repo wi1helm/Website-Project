@@ -1,3 +1,6 @@
+
+console.log("first?")
+
 export let windowList = [];
 let createdWindows = 0;
 let currentWindow = null;
@@ -354,7 +357,6 @@ function createQuoteWindow(window) {
     windowDiv.style.top = '20%';
     windowDiv.style.left = '20%';
     windowDiv.style.width = '815px';
-    windowDiv.style.height = '44%';
     windowDiv.classList.add('window');
   
     const windowBar = document.createElement('div');
@@ -397,12 +399,11 @@ function createQuoteWindow(window) {
   
     const headerDiv = document.createElement('div');
     headerDiv.style.display = 'flex';
-    headerDiv.style.height = '40%';
     const header = document.createElement('h1');
     header.textContent = window.text;
     header.classList.add('uppercase'); // Add 'uppercase' class
-    header.style.fontSize = '30px';
-    header.style.padding = '20px';
+    header.id = "qHeader"
+    header.style.padding = '10px';
     header.style.color = 'white';
     headerDiv.appendChild(header);
     windowContent.appendChild(headerDiv);
@@ -414,13 +415,14 @@ function createQuoteWindow(window) {
     const date = document.createElement('h1');
     date.textContent = window.date;
     date.style.fontSize = '40px';
+    date.style.marginRight = "20px"
     date.style.color = 'white';
     date.id = "date"
     dateDiv.appendChild(date);
     windowContent.appendChild(dateDiv);
   
     const imageDiv = document.createElement('div');
-    imageDiv.style.height = '50%';
+    imageDiv.id = "imageDiv"
     imageDiv.style.display = 'flex';
     imageDiv.style.alignItems = 'end';
     const dice = document.createElement('img');
@@ -516,6 +518,7 @@ export function createWindow(id, windowData, windowType) {
           Window.style.top = `calc(${Window.style.top} + ${positionOffset}px)`;
           createdWindows++; // Increment the created windows counter
           windowList.push(Window);
+          console.log("pushed 4")
   
 
           // Add the actionbar element
@@ -590,9 +593,17 @@ load().then(windowData => {
     default:
       console.error('Unexpected page:', currentPage);
   }
-
+  const backgroundImageResizeScript = document.createElement('script');
+  backgroundImageResizeScript.src = 'backgroundImageResize.js';
+  backgroundImageResizeScript.type = 'module'; // add type module
+  document.body.appendChild(backgroundImageResizeScript);
   
 });
+
+function isMobile() {
+  console.log(window.innerWidth,"ijhgfdkln")
+  return window.innerWidth < 1000;
+}
 
 function createWindowHome(windowData) {}
 
@@ -600,17 +611,39 @@ function createWindowQvoutes(windowData) {
   const min = 1;
   const max = 10;
   const randomValue = getRandomNumber(min, max);
+  if (isMobile()){
   createWindow(randomValue, windowData, 'qvoute');
+  } else{
+    createWindow(randomValue, windowData, 'qvoute');
+  }
 }
 
 function createWindowProject(windowData) {
-  createWindow(12, windowData, 'project');
+  if (isMobile()){
+    createWindow(12, windowData, 'project');
+    createWindow(13, windowData, 'project');
+  } else{
+    createWindow(12, windowData, 'project');
+    
+  }
 }
 function createWindowWorlds(windowData) {
-  createWindow(11, windowData, 'world');
+  if (isMobile()){
+    console.log("cool")
+    createWindow(11, windowData, 'world');
+    } else{
+      createWindow(11, windowData, 'world');
+      
+    }
 }
 function createWindowContact(windowData) {
-  createWindow(14, windowData, 'contact');
+  
+  if (isMobile()){
+    createWindow(14, windowData, 'contact');
+    } else{
+      createWindow(14, windowData, 'contact');
+      
+    }
 }
 
 
@@ -648,5 +681,6 @@ function releaseWindow(event) {
     document.removeEventListener('mousemove', moveWindow);
     document.removeEventListener('mouseup', releaseWindow);
   }
+
 
   

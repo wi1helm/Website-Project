@@ -422,6 +422,13 @@ footer{
 #search-icon-footer{
     display: none;
 }
+
+#qHeader{
+    font-size: 30px;
+}
+#imageDiv{
+    height: 50%;
+}
 @media screen and (max-width: 1700px) {
     #empty{
         width: 0px;
@@ -441,6 +448,7 @@ footer{
         display: none;
     }
     #navbar{
+        
         flex-direction: column;
     }
     #navbar #navbuttons{
@@ -472,20 +480,22 @@ footer{
     }
     .circle{
         opacity: 100%;
-        margin-left: 20px;
-        margin-right: 20px;
+        margin: 20px;
         display: block;
-        width: 60px;
-        height: 60px;
-        margin-top: 20px;
+        width: 40px;
+        height: 40px;
+        
     }
     #search-icon-footer{
-        display: block;
+        display: none;
         padding: 40px;
         width: 60px;
         height: 60px;
     }
     #search-icon{
+        display: none;
+    }
+    #line{
         display: none;
     }
     #color-selection{
@@ -510,5 +520,25 @@ footer{
         color: white;
         outline: none;
     
+    }
+    .title{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 50%;
+        font-family: "Tahoma";
+        font-weight: bolder;
+        font-size: 35px;
+        margin-left: 10px;
+    }
+    .exit{
+        display: none;
+    }
+    #qHeader{
+        font-size: 50px;
+        margin: 10px;
+    }
+    #imageDiv{
+        height: 10%;
     }
   }
