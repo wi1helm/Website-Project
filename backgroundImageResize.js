@@ -25,12 +25,13 @@ function updateBackgroundImage() {
 
 // Check if the website is in mobile mode
 function isMobile() {
-  return window.innerWidth < 1200;
+  return window.innerWidth < 1100;
 }
 
 export function fixWindowsToScroll() {
   console.log(window.innerWidth)
   // Check if the website is in mobile mode
+  console.log(isMobile(), "ismobile")
   if (isMobile()) {
     console.log(window.innerWidth,"width 2" , windowList.length)  
     // Set window width and height to a fixed value
