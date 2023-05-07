@@ -255,7 +255,6 @@ function createWorldsWindow(window) {
   windowContainer.style.top = '10%';
   windowContainer.style.left = '10%';
   windowContainer.style.width = '50%';
-  windowContainer.style.height = '50%';
 
   // Window bar
   const windowBar = document.createElement('div');

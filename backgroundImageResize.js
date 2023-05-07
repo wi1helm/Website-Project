@@ -29,10 +29,6 @@ function isMobile() {
 }
 
 export function fixWindowsToScroll() {
-  let oldSize = [];
-  for (let i = 0; i < windowList.length; i++) {
-    oldSize.push([windowList[i].style.width, windowList[i].style.height]);
-  }
   console.log(window.innerWidth)
   // Check if the website is in mobile mode
   if (isMobile()) {
@@ -40,14 +36,16 @@ export function fixWindowsToScroll() {
     // Set window width and height to a fixed value
     for (let i = 0; i < windowList.length; i++) {
       windowList[i].style.width = "90%";
-      windowList[i].style.maxheight = "600px"
+      windowList[i].style.maxheight = "800px"
       windowList[i].style.top = i * 7 + "20px"
       windowList[i].style.left = "50px"
+      
       console.log("jgn")
     }
   } else {
     // Set window width and height back to original size
     for (let i = 0; i < windowList.length; i++) {
+      console.log(oldSize[i][0]);
       windowList[i].style.width = oldSize[i][0];
       windowList[i].style.top = "50px"
       windowList[i].style.left = "50px"
@@ -61,6 +59,7 @@ let oldSize = [];
 for (let i = 0; i < windowList.length; i++) {
   oldSize.push([windowList[i].style.width, windowList[i].style.height]);
 }
+console.log("oldSize:", oldSize);
 console.log("1")
 // Run the function on page load
 
