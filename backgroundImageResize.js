@@ -29,6 +29,10 @@ function isMobile() {
 }
 
 export function fixWindowsToScroll() {
+  let oldSize = [];
+  for (let i = 0; i < windowList.length; i++) {
+  oldSize.push([windowList[i].style.width, windowList[i].style.height]);
+  }
   console.log(window.innerWidth)
   // Check if the website is in mobile mode
   console.log(window.innerWidth, "ismobile");
