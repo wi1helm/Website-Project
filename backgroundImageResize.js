@@ -31,17 +31,17 @@ function isMobile() {
 export function fixWindowsToScroll() {
   console.log(window.innerWidth)
   // Check if the website is in mobile mode
-  console.log(isMobile(), "ismobile")
+  console.log(window.innerWidth, "ismobile");
   if (isMobile()) {
     console.log(window.innerWidth,"width 2" , windowList.length)  
     // Set window width and height to a fixed value
     for (let i = 0; i < windowList.length; i++) {
       windowList[i].style.width = "90%";
-      windowList[i].style.maxheight = "800px"
-      windowList[i].style.top = i * 7 + "20px"
-      windowList[i].style.left = "50px"
+      windowList[i].style.maxheight = "800px";
+      windowList[i].style.top = i * 7 + "20px";
+      windowList[i].style.left = "50px";
       
-      console.log("jgn")
+      console.log("jgn");
     }
   } else {
     // Set window width and height back to original size
