@@ -1,5 +1,5 @@
 
-console.log("firstirergghdn")
+
 
 
 
@@ -33,9 +33,9 @@ export function fixWindowsToScroll() {
   for (let i = 0; i < windowList.length; i++) {
   oldSize.push([windowList[i].style.width, windowList[i].style.height]);
   }
-  console.log(window.innerWidth)
+  
   // Check if the website is in mobile mode
-  console.log(window.innerWidth, "ismobile");
+  
   if (isMobile()) {
     console.log(window.innerWidth,"width 2" , windowList.length)  
     // Set window width and height to a fixed value
@@ -45,7 +45,7 @@ export function fixWindowsToScroll() {
       windowList[i].style.top = i * 7 + "20px";
       windowList[i].style.left = "50px";
       
-      console.log("jgn");
+      
     }
   } else {
     // Set window width and height back to original size
@@ -54,7 +54,7 @@ export function fixWindowsToScroll() {
       windowList[i].style.width = oldSize[i][0];
       windowList[i].style.top = "50px"
       windowList[i].style.left = "50px"
-      console.log("back")
+      
     }
   }
 }
@@ -64,8 +64,7 @@ let oldSize = [];
 for (let i = 0; i < windowList.length; i++) {
   oldSize.push([windowList[i].style.width, windowList[i].style.height]);
 }
-console.log("oldSize:", oldSize);
-console.log("1")
+
 // Run the function on page load
 
 
@@ -73,12 +72,12 @@ console.log("1")
 window.addEventListener("resize", () => {
   fixWindowsToScroll();
   updateBackgroundImage();
-  console.log("fd")
+
 });
 
 updateBackgroundImage();
 fixWindowsToScroll();
-console.log("3")
+
 
 
 

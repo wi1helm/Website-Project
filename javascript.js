@@ -1,5 +1,5 @@
 
-console.log("first?")
+
 
 export let windowList = [];
 let createdWindows = 0;
@@ -600,7 +600,6 @@ load().then(windowData => {
 });
 
 function isMobile() {
-  console.log(window.innerWidth,"ijhgfdkln")
   return window.innerWidth < 1000;
 }
 
@@ -628,7 +627,6 @@ function createWindowProject(windowData) {
 }
 function createWindowWorlds(windowData) {
   if (isMobile()){
-    console.log("cool")
     createWindow(11, windowData, 'world');
     } else{
       createWindow(11, windowData, 'world');
@@ -668,7 +666,6 @@ function moveWindow(event) {
         const maxHeight = window.innerHeight - windowRect.height;
         const left = Math.max(0, Math.min(maxWidth, event.clientX - offset.x));
         const top = Math.max(0, Math.min(maxHeight - 140, event.clientY - offset.y)) ;
-        console.log(top)
         currentWindow.style.left = left + 'px';
         currentWindow.style.top = top + 'px';
     }
